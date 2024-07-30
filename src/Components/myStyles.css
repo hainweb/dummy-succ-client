@@ -1,13 +1,11 @@
-/* General Styles */
 .dark {
   background-color: #2d3941 !important;
   color: lightgray !important;
 }
 
 .icon {
-  width: 2em; /* Increase size if needed */
-  height: 2em; /* Increase size if needed */
-  margin: 0 0.5em; /* Adjust spacing between icons */
+  width: 1.25em !important;
+  height: 1.25em !important;
 }
 
 .main-container {
@@ -16,21 +14,16 @@
   width: 90vw;
   display: flex;
   border-radius: 20px;
-  flex-direction: row; /* Default flex direction */
 }
 
 .sidebar-container {
-  flex: 0.2; /* Reduced from 0.3 to 0.2 */
+  flex: 0.3;
   display: flex;
   flex-direction: column;
-  order: 1; /* Default order */
 }
 
 .chatArea-container {
-  flex: 0.8; /* Increased from 0.7 to 0.8 */
-  display: flex;
-  flex-direction: column;
-  order: 2; /* Default order */
+  flex: 0.7;
 }
 
 .sb-header {
@@ -77,21 +70,6 @@ input:focus {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   margin: 10px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  max-height: calc(100vh - 80px); /* Adjust height as needed */
-}
-
-.sb-conversations::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-}
-
-.sb-conversations::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5); /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
-}
-
-.sb-conversations::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the scrollbar track */
 }
 
 .conversation-container {
@@ -104,18 +82,20 @@ input:focus {
   border-radius: 10px;
   box-sizing: border-box;
 }
-
 .conversation-container:hover {
   background-color: #d9d9d9;
 }
 
+
 .con-icon {
   grid-area: 1/1/3/2;
+
   display: flex;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
   background-color: #d9d9d9;
+
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 2rem;
   font-weight: bolder;
@@ -123,6 +103,7 @@ input:focus {
   height: 48px;
   width: 48px;
   padding: 2px;
+
   border-radius: 50%;
   justify-self: center;
   align-self: center;
@@ -138,13 +119,17 @@ input:focus {
   text-transform: capitalize;
 }
 
-.other-message-container .conversation-container:hover {
+.other-message-container .conversation-container:hover
+{
   background-color: white;
 }
 
-.other-message-container .con-lastMessage {
+.other-message-container .con-lastMessage
+{
   color: black;
-  font-size: medium;
+  font-size:medium;
+  /* font-style: normal; */
+  /* font-weight: bold; */
 }
 
 .con-timeStamp {
@@ -160,6 +145,12 @@ input:focus {
   font-weight: lighter;
   font-style: italic;
   color: rgba(0, 0, 0, 0.54);
+}
+
+.chatArea-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0.7;
 }
 
 .chatArea-header {
@@ -189,22 +180,17 @@ input:focus {
   padding: 10px 10px;
   margin: 10px;
   border-radius: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
-  scrollbar-width: thin;
-  max-height: calc(100vh - 150px); /* Adjust height based on header and input area */
+  overflow: scroll;
+  scrollbar-width: none;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .messages-container::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  display: none;
 }
-
-.messages-container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5); /* Color of the scrollbar thumb */
-  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
-}
-
-.messages-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color of the scrollbar track */
+.messages-container::-webkit-scrollbar {
+  display: none;
 }
 
 .text-input-area {
@@ -260,6 +246,120 @@ input:focus {
   flex: 0.7;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: rgba(0, 0, 0, 0.54);
+  border-bottom: 5px solid #63d7b0;
+  border-radius: 20px;
+}
+
+.createGroups-container {
+  flex: 0.7;
+  align-self: center;
+  padding: 20px 10px;
+  margin: 10px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-container {
+  height: 90vh;
+  width: 90vw;
+  background-color: #f4f5f8;
+  border-radius: 20px;
+  display: flex;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.image-container {
+  flex: 0.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-text {
+  font-size: 2vw;
+  padding-bottom: 20px;
+}
+
+.login-box {
+  flex: 0.7;
+  background-color: white;
+  border-radius: 20px;
+  margin: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #63d7b0;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.list-container {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+}
+
+.ug-header {
+  background-color: white;
+  border-radius: 20px;
+  padding: 12px 5px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.ug-title {
+  color: rgba(0, 0, 0, 0.54);
+  margin-left: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+
+.ug-list {
+  flex: 1;
+  overflow: scroll;
+  scrollbar-width: none;
+  padding: 10px;
+}
+
+.ug-list::-webkit-scrollbar {
+  display: none;
+}
+
+.list-tem {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 20px;
+  padding: 10px 5px;
+  margin: 10px;
+  user-select: none;
+}
+
+.hyper {
+  color: darkviolet;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.other-icons {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
 }
 
 /* Mobile Styles */
