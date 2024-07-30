@@ -11,6 +11,7 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import io from "socket.io-client";
 
+// Initialize socket
 const socket = io('https://dummy-succ-server.onrender.com'); // Replace with your server URL
 
 function ChatArea() {
@@ -23,6 +24,10 @@ function ChatArea() {
   const [allMessages, setAllMessages] = useState([]);
   const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setloaded] = useState(false);
+
+  // Audio refs
+  const sendSound = useRef(new Audio('/sounds/send.mp3'));
+  const receiveSound = useRef(new Audio('/sounds/resive.mp3'));
 
   useEffect(() => {
     const config = {
@@ -40,6 +45,7 @@ function ChatArea() {
 
     socket.on('receiveMessage', (message) => {
       setAllMessages((prevMessages) => [...prevMessages, message]);
+      receiveSound.current.play(); // Play sound on receiving message
     });
 
     return () => {
@@ -65,6 +71,7 @@ function ChatArea() {
       )
       .then(({ data }) => {
         socket.emit('sendMessage', data);
+        sendSound.current.play(); // Play sound on sending message
         setMessageContent('');
       });
   };
