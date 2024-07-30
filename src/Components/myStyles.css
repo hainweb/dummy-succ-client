@@ -16,18 +16,21 @@
   width: 90vw;
   display: flex;
   border-radius: 20px;
+  flex-direction: row; /* Default flex direction */
 }
 
 .sidebar-container {
   flex: 0.2; /* Reduced from 0.3 to 0.2 */
   display: flex;
   flex-direction: column;
+  order: 1; /* Default order */
 }
 
 .chatArea-container {
-  flex: 0.7; /* Increased from 0.7 to 0.8 */
+  flex: 0.8; /* Increased from 0.7 to 0.8 */
   display: flex;
   flex-direction: column;
+  order: 2; /* Default order */
 }
 
 .sb-header {
@@ -186,14 +189,22 @@ input:focus {
   padding: 10px 10px;
   margin: 10px;
   border-radius: 20px;
-  overflow: scroll;
-  scrollbar-width: none;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin;
+  max-height: calc(100vh - 150px); /* Adjust height based on header and input area */
 }
 
 .messages-container::-webkit-scrollbar {
-  display: none;
+  width: 8px; /* Width of the scrollbar */
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
 }
 
 .text-input-area {
@@ -249,4 +260,29 @@ input:focus {
   flex: 0.7;
   display: flex;
   flex-direction: column;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column; /* Stack sidebar and chat area vertically */
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .sidebar-container {
+    order: 2; /* Place sidebar below chat area */
+    flex: 1;
+    width: 100%; /* Full width */
+  }
+
+  .chatArea-container {
+    order: 1; /* Place chat area above sidebar */
+    flex: 1;
+    width: 100%; /* Full width */
+  }
+
+  .messages-container {
+    max-height: calc(88vh - 150px); /* Adjust height based on header and input area */
+  }
 }
