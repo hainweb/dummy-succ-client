@@ -12,7 +12,7 @@ import { myContext } from "./MainContainer";
 import io from "socket.io-client";
 
 // Configure socket connection
-const socket = io('http://localhost:8080'); // Replace with your server URL
+const socket = io('https://dummy-succ-server.onrender.com'); // Replace with your server URL
 
 function ChatArea() {
   const lightTheme = useSelector((state) => state.themeKey);
@@ -38,7 +38,7 @@ function ChatArea() {
 
     // Fetch initial messages
     axios
-      .get(`http://localhost:8080/message/${chat_id}`, config)
+      .get(`https://dummy-succ-server.onrender.com/message/${chat_id}`, config)
       .then(({ data }) => {
         setAllMessages(data);
         setLoaded(true);
@@ -77,7 +77,7 @@ function ChatArea() {
 
     axios
       .post(
-        "http://localhost:8080/message/",
+        "https://dummy-succ-server.onrender.com/message/",
         {
           content: messageContent,
           chatId: chat_id,
