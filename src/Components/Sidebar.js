@@ -41,7 +41,7 @@ function Sidebar() {
       },
     };
 
-    axios.get("https://dummy-succ-server.onrender.com/chat/", config).then((response) => {
+    axios.get("http://localhost:8080/chat/", config).then((response) => {
       console.log("Data refresh in sidebar ", response.data);
       setConversations(response.data);
       // setRefresh(!refresh);
@@ -154,6 +154,7 @@ function Sidebar() {
                   <p className={"con-title" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name}
                   </p>
+                  
 
                   <p className="con-lastMessage">
                     No previous Messages, click here to start a new chat
@@ -185,7 +186,7 @@ function Sidebar() {
                   {conversation.users[1].name}
                 </p>
 
-                <p className="con-lastMessage">
+                <p className={"con-lastMessage" + (lightTheme ? "" : " dark")} >
                   {conversation.latestMessage.content}
                 </p>
                 {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
