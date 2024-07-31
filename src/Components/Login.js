@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../Images/live-chat_512px.png";
+import logo from "../Images/logo.png";
 import { Backdrop, Button, CircularProgress, TextField } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ function Login() {
       };
 
       const response = await axios.post(
-        "https://dummy-succ-server.onrender.com/user/login/",
+        "http://localhost:8080/user/login/",
         data,
         config
       );
@@ -58,7 +58,7 @@ function Login() {
       };
 
       const response = await axios.post(
-        "https://dummy-succ-server.onrender.com/user/register/",
+        "http://localhost:8080/user/register/",
         data,
         config
       );
