@@ -58,7 +58,7 @@ function Login() {
       };
 
       const response = await axios.post(
-        "http://localhost:8080/user/register/",
+        "https://dummy-succ-server.onrender.com/user/register/",
         data,
         config
       );
