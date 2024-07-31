@@ -11,8 +11,8 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import io from "socket.io-client";
 
-// Initialize socket
-const socket = io('https://dummy-succ-server.onrender.com'); // Replace with your server URL
+// Configure socket connection
+const socket = io('http://localhost:8080'); // Replace with your server URL
 
 function ChatArea() {
   const lightTheme = useSelector((state) => state.themeKey);
@@ -23,11 +23,11 @@ function ChatArea() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
   const { refresh, setRefresh } = useContext(myContext);
-  const [loaded, setloaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [userStatus, setUserStatus] = useState('offline'); // To manage user status
 
-  // Audio refs
   const sendSound = useRef(new Audio('/sounds/send.mp3'));
-  const receiveSound = useRef(new Audio('/sounds/resive.mp3'));
+  const receiveSound = useRef(new Audio('/sounds/receive.mp3'));
 
   useEffect(() => {
     const config = {
@@ -36,20 +36,35 @@ function ChatArea() {
       },
     };
 
+    // Fetch initial messages
     axios
-      .get("https://dummy-succ-server.onrender.com/message/" + chat_id, config)
+      .get(`http://localhost:8080/message/${chat_id}`, config)
       .then(({ data }) => {
         setAllMessages(data);
-        setloaded(true);
+        setLoaded(true);
       });
 
+    // Handle incoming messages
     socket.on('receiveMessage', (message) => {
       setAllMessages((prevMessages) => [...prevMessages, message]);
-      receiveSound.current.play(); // Play sound on receiving message
+      receiveSound.current.play();
     });
+
+    // Handle user status updates
+    socket.on('userStatus', ({ userId, status }) => {
+      if (userId === userData.data._id) {
+        setUserStatus(status);
+      }
+    });
+
+    // Set user status to online when component mounts
+    socket.emit('updateStatus', { userId: userData.data._id, status: 'online' });
 
     return () => {
       socket.off('receiveMessage');
+      socket.off('userStatus');
+      // Set user status to offline when component unmounts
+      socket.emit('updateStatus', { userId: userData.data._id, status: 'offline' });
     };
   }, [refresh, chat_id, userData.data.token]);
 
@@ -62,7 +77,7 @@ function ChatArea() {
 
     axios
       .post(
-        "https://dummy-succ-server.onrender.com/message/",
+        "http://localhost:8080/message/",
         {
           content: messageContent,
           chatId: chat_id,
@@ -71,7 +86,7 @@ function ChatArea() {
       )
       .then(({ data }) => {
         socket.emit('sendMessage', data);
-        sendSound.current.play(); // Play sound on sending message
+        sendSound.current.play();
         setMessageContent('');
       });
   };
@@ -119,9 +134,10 @@ function ChatArea() {
             <p className={"con-title" + (lightTheme ? "" : " dark")}>
               {chat_user}
             </p>
-            <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
-              <DeleteIcon />
-            </IconButton>
+            <span
+              className={`status-indicator ${userStatus === 'online' ? 'online' : 'offline'}`}
+            />
+            {userStatus === 'online' && <span className="status-label">Active</span>}
           </div>
         </div>
         <div className={"messages-container" + (lightTheme ? "" : " dark")}>
@@ -140,7 +156,8 @@ function ChatArea() {
         </div>
         <div ref={messagesEndRef} className="BOTTOM" />
         <div className={"text-input-area" + (lightTheme ? "" : " dark")}>
-          <input
+          <input 
+          
             placeholder="Type a Message"
             className={"search-box" + (lightTheme ? "" : " dark")}
             value={messageContent}
