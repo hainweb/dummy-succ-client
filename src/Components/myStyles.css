@@ -504,6 +504,62 @@ width: auto;
 }
 
 /* Mobile Styles */
+@keyframes rippleEffect {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes glowFocus {
+  from {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  to {
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(15px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 768px) {
   .app-container {
     width: 100vw;
@@ -513,13 +569,18 @@ width: auto;
 
   .sidebar-container,
   .chatArea-container {
-  
     width: 100%;
     height: 94%;
     position: fixed;
     top: 0;
     left: 0;
     overflow-y: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .sidebar-container.hidden {
+    transform: translateX(-100%);
+    opacity: 0;
   }
 
   .sb-header {
@@ -540,6 +601,12 @@ width: auto;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .conversation-container:hover {
+    background-color: #e0e0e0;
+    animation: scaleIn 0.3s ease;
   }
 
   .con-icon {
@@ -569,6 +636,11 @@ width: auto;
     height: calc(100% - 120px);
     overflow-y: auto;
     padding: 10px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .message {
+    animation: bounceIn 0.5s ease;
   }
 
   .text-input-area {
@@ -579,6 +651,7 @@ width: auto;
     display: flex;
     padding: 10px;
     background-color: white;
+    animation: slideIn 0.5s ease;
   }
 
   .text-input-area input {
@@ -587,5 +660,29 @@ width: auto;
     border: 1px solid #e0e0e0;
     border-radius: 20px;
     margin-right: 10px;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .text-input-area input:focus {
+    animation: glowFocus 0.3s ease;
+  }
+
+  .button {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button:active::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    width: 200%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rippleEffect 0.6s ease-out;
   }
 }
+
