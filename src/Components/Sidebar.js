@@ -156,7 +156,7 @@ function Sidebar() {
                   </p>
                   
 
-                  <p className="con-lastMessage">
+                  <p className="con-lastMessageSide">
                     No previous Messages, click here to start a new chat
                   </p>
                   {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
@@ -186,7 +186,7 @@ function Sidebar() {
                   {conversation.users[1].name}
                 </p>
 
-                <p className={"con-lastMessage" + (lightTheme ? "" : " dark")} >
+                <p className={"con-lastMessageSide" + (lightTheme ? "" : " dark")} >
                   {conversation.latestMessage.content}
                 </p>
                 {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
