@@ -196,7 +196,7 @@ width: auto;
   width: auto; /* Allow width to be determined by content */
   overflow: hidden; /* Hides overflowing text */
   text-overflow: ellipsis; /* Adds ellipsis for overflow */
-  white-space: normal; /* Allows text to wrap onto multiple lines */
+  white-space: nowrap; /* Allows text to nowrap onto multiple lines */
   color: rgba(0, 0, 0, 0.54);
 }
 
