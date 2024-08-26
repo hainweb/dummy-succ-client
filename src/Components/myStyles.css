@@ -189,7 +189,7 @@ width: auto;
 }
 
 
-.con-lastMessage {
+.con-lastMessageSide{
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: medium;
   font-weight: lighter;
@@ -197,6 +197,17 @@ width: auto;
   overflow: hidden; /* Hides overflowing text */
   text-overflow: ellipsis; /* Adds ellipsis for overflow */
   white-space: nowrap; /* Allows text to nowrap onto multiple lines */
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.con-lastMessage{
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: medium;
+  font-weight: lighter;
+  width: auto; /* Allow width to be determined by content */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis for overflow */
+  /* Allows text to nowrap onto multiple lines */
   color: rgba(0, 0, 0, 0.54);
 }
 
